@@ -4,7 +4,7 @@ class Day1 {
 
         var count = 0
         lines.forEachIndexed { index, s ->
-            if (index > 0 && s.compareTo(lines[index - 1]) >= 0)
+            if (index > 0 && s.toInt() > lines[index - 1].toInt())
                 count++;
         }
 
