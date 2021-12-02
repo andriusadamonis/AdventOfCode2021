@@ -1,6 +1,7 @@
 fun main() {
 
     println("day1    : ${Day1().count(readLines("day1.txt"))}")
+    println("day1_2  : ${Day1().countRunning(readLines("day1.txt"))}")
 
 }
 
