@@ -2,6 +2,8 @@ fun main() {
 
     println("day1    : ${Day1().count(readLines("day1.txt"))}")
     println("day1_2  : ${Day1().countRunning(readLines("day1.txt"))}")
+    println("day2    : ${Day2().positionMultiplied(readLines("day2.txt"))}")
+    println("day2_2  : ${Day2().positionMultiplied2(readLines("day2.txt"))}")
 
 }
 
