@@ -1,34 +1,46 @@
+import java.lang.StringBuilder
+
 class Day3 {
 
-    @kotlin.ExperimentalUnsignedTypes
-    fun powerConsumption(report: Iterable<UInt>): UInt {
+    fun powerConsumption(report: Iterable<String>): Long {
 
-        val gammaRate = gamma(report.map { it.toUInt() })
-        val epsilonRate = gammaRate.inv() and 0b11111u
+        val gammaRate = gamma(report)
+        val epsilonRate = invert(gammaRate)
 
-        return gammaRate * epsilonRate
+        return gammaRate.toLong(2) * epsilonRate.toLong(2)
 
     }
 
-    @kotlin.ExperimentalUnsignedTypes
-    fun gamma(report: Iterable<UInt>): UInt {
+    fun invert(value: String): String {
 
-        val flags = uintArrayOf(1u, 2u, 4u, 8u, 16u);
-        var counts0 = IntArray(flags.size) { 0 }
-        var counts1 = IntArray(flags.size) { 0 }
+        var builder = StringBuilder()
+        value.forEach {
+            builder.append(if (it == '0') '1' else if (it == '1') '0' else it)
+        }
+        return builder.toString()
+
+    }
+
+
+    fun gamma(report: Iterable<String>): String {
+
+        data class Cnt(var zeros: Int, var ones: Int)
+
+        var counts = mutableListOf<Cnt>()
 
         report.forEach {
-            flags.forEachIndexed { index, flag ->
-                if (it and flag != 0u)
-                    counts1[index]++
-                else
-                    counts0[index]++ }
+            it.reversed().forEachIndexed() { index, ch ->
+                while (counts.size <= index) counts.add(Cnt(0, 0))
+                if (ch == '0')
+                    counts[index].zeros++
+                else if (ch == '1')
+                    counts[index].ones++
+            }
         }
 
-        var result = 0u
-        flags.forEachIndexed { index, flag ->
-            if (counts1[index] > counts0[index])
-                result = result or flag
+        var result = ""
+        counts.forEach {
+            result = (if (it.ones > it.zeros) "1" else "0") + result
         }
 
         return result
