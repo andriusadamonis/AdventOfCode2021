@@ -1,12 +1,12 @@
 class Day1 {
 
-    fun count(lines: List<String>): Int {
+    fun count(lines: Iterable<String>): Int {
 
         return countGrowing(lines.map { it.toInt() })
 
     }
 
-    fun countRunning(lines: List<String>): Int {
+    fun countRunning(lines: Iterable<String>): Int {
 
         return countRunningTotalsOf5(lines.map { it.toInt() })
 
