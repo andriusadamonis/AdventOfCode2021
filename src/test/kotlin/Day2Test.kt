@@ -31,6 +31,16 @@ internal class Day2Test {
 
     }
 
+    @Test
+    fun testPositionMultiplied2() {
+
+        val actual = Day2().calculatePosition2(readLines("day2.txt"))
+
+        assertEquals(15, actual.horizontal)
+        assertEquals(60, actual.depth)
+
+    }
+
     fun readLines(resourceName: String): List<String> {
 
         val url = object {}::class.java.getResource(resourceName)
