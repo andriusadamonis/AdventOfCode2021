@@ -8,7 +8,7 @@ fun main() {
 
 }
 
-fun readLines(resourceName: String): List<String> {
+fun readLines(resourceName: String): Iterable<String> {
 
     val url = object {}::class.java.getResource(resourceName)
     if (url != null) {
