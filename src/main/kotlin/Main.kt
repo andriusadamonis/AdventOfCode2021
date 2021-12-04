@@ -6,6 +6,7 @@ fun main() {
     println("day2_2  : ${Day2().positionMultiplied2(readLines("day2.txt"))}")
     println("day3    : ${Day3().powerConsumption(readLines("day3.txt"))}")
     println("day3_2  : ${Day3().lifeSupport(readLines("day3.txt"))}")
+    println("day4    : ${Day4().bingo(readLines("day4.txt"))}")
 
 }
 
