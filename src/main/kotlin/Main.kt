@@ -5,10 +5,11 @@ fun main() {
     println("day2    : ${Day2().positionMultiplied(readLines("day2.txt"))}")
     println("day2_2  : ${Day2().positionMultiplied2(readLines("day2.txt"))}")
     println("day3    : ${Day3().powerConsumption(readLines("day3.txt"))}")
+    println("day3_2  : ${Day3().lifeSupport(readLines("day3.txt"))}")
 
 }
 
-fun readLines(resourceName: String): Iterable<String> {
+fun readLines(resourceName: String): List<String> {
 
     val url = object {}::class.java.getResource(resourceName)
     if (url != null) {

@@ -35,4 +35,29 @@ internal class Day3Test {
 
     }
 
+    @Test
+    fun testLifeSupport() {
+
+        val actual = Day3().lifeSupport(readLines("day3.txt"))
+
+        assertEquals(230, actual)
+
+    }
+
+    @Test
+    fun testOxygen() {
+
+        val actual = Day3().oxygen(readLines("day3.txt"))
+
+        assertEquals("10111", actual)
+    }
+
+    @Test
+    fun tesCO2Scrubber() {
+
+        val actual = Day3().co2Scrubber(readLines("day3.txt"))
+
+        assertEquals("01010", actual)
+    }
+
 }
