@@ -63,7 +63,7 @@ class Day5 {
 
         for (y in minY..maxY) {
 
-            print(String.format("%${maxY.toString().length}d: ", y))
+            // print(String.format("%${maxY.toString().length}d: ", y))
 
             for (x in minX..maxX) {
 
@@ -73,10 +73,10 @@ class Day5 {
                 if (cnt > 1)
                     result++
 
-                print(if (cnt > 9) "#" else if (cnt == 0) "." else cnt)
+                // print(if (cnt > 9) "#" else if (cnt == 0) "." else cnt)
 
             }
-            println("")
+            // println("")
         }
         return result
     }
