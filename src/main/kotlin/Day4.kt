@@ -1,18 +1,24 @@
 class Day4 {
 
-    data class Board(val board: MutableMap<Int, Cell>, var marked: Boolean)
+    data class Board(val no: Int, var marked: Boolean, val board: MutableMap<Int, Cell>)
     data class Cell(val col: Int, val row: Int, val number: Int, var marked: Boolean)
 
-    fun bingo(data: List<String>): Int {
-        return play(data, { current, boards ->
-            if (current.marked)
-                current
+    fun bingoWinning(data: List<String>): Int {
+        return play(data, { markedBoards, boards ->
+            markedBoards.firstOrNull { it.marked }
+        })
+    }
+
+    fun bingoLosing(data: List<String>): Int {
+        return play(data, { markedBoards, boards ->
+            if (boards.all({ it.marked }))
+                markedBoards.lastOrNull()
             else
                 null
         })
     }
 
-    fun play(data: List<String>, stopRule: (current: Board, boards: List<Board>) -> Board?): Int {
+    fun play(data: List<String>, stopRule: (markedBoards: List<Board>, boards: List<Board>) -> Board?): Int {
 
         // load
 
@@ -25,7 +31,7 @@ class Day4 {
         while (++p < data.size) {
             val str = data[p].trim()
             if (str.isBlank()) {
-                boards += Board(mutableMapOf<Int, Cell>(), false)
+                boards += Board(boards.size, false, mutableMapOf<Int, Cell>())
                 row = 0
             }
             else {
@@ -42,7 +48,7 @@ class Day4 {
         p = -1
         while (++p < moves.size) {
 
-            val updatedBoards: MutableList<Board> = mutableListOf<Board>()
+            val markedBoards: MutableList<Board> = mutableListOf()
 
             for (board in boards.withIndex()) {
 
@@ -52,23 +58,24 @@ class Day4 {
                     board.value.board[moves[p]]?.marked = true
 
                     // check if there's full col or row
-                    board.value.marked =
+                    val mark =
                         (board.value.board.filter { it.value.row == board.value.board[moves[p]]?.row }.all { it.value.marked }) ||
                         (board.value.board.filter { it.value.col == board.value.board[moves[p]]?.col }.all { it.value.marked })
 
-                    if (board.value.marked) {
-                        updatedBoards.add(board.value)
+                    if (!board.value.marked && mark) {
+
+                        board.value.marked = true
+                        markedBoards.add(board.value)
+
                     }
                 }
             }
 
-            for (board in boards) {
-                val winner = stopRule(board, boards)
-                if (winner != null) {
+            val winner = stopRule(markedBoards, boards)
+            if (winner != null) {
 
-                    return moves[p] * winner.board.filter { !it.value.marked }.map { it.value.number }.sum()
+                return moves[p] * winner.board.filter { !it.value.marked }.map { it.value.number }.sum()
 
-                }
             }
         }
 

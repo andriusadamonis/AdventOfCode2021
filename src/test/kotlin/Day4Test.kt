@@ -4,11 +4,20 @@ import org.junit.jupiter.api.Test
 internal class Day4Test {
 
     @Test
-    fun testBingo() {
+    fun testBingoWinner() {
 
-        val actual = Day4().bingo(readLines("day4.txt"))
+        val actual = Day4().bingoWinning(readLines("day4.txt"))
 
         assertEquals(4512, actual)
+
+    }
+
+    @Test
+    fun testBingoLoser() {
+
+        val actual = Day4().bingoLosing(readLines("day4.txt"))
+
+        assertEquals(1924, actual)
 
     }
 
