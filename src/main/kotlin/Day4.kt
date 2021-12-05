@@ -4,6 +4,15 @@ class Day4 {
     data class Cell(val col: Int, val row: Int, val number: Int, var marked: Boolean)
 
     fun bingo(data: List<String>): Int {
+        return play(data, { current, boards ->
+            if (current.marked)
+                current
+            else
+                null
+        })
+    }
+
+    fun play(data: List<String>, stopRule: (current: Board, boards: List<Board>) -> Board?): Int {
 
         // load
 
@@ -32,6 +41,9 @@ class Day4 {
 
         p = -1
         while (++p < moves.size) {
+
+            val updatedBoards: MutableList<Board> = mutableListOf<Board>()
+
             for (board in boards.withIndex()) {
 
                 if (board.value.board.contains(moves[p])) {
@@ -45,10 +57,17 @@ class Day4 {
                         (board.value.board.filter { it.value.col == board.value.board[moves[p]]?.col }.all { it.value.marked })
 
                     if (board.value.marked) {
-
-                        return moves[p] * board.value.board.filter { !it.value.marked }.map { it.value.number }.sum()
-
+                        updatedBoards.add(board.value)
                     }
+                }
+            }
+
+            for (board in boards) {
+                val winner = stopRule(board, boards)
+                if (winner != null) {
+
+                    return moves[p] * winner.board.filter { !it.value.marked }.map { it.value.number }.sum()
+
                 }
             }
         }
