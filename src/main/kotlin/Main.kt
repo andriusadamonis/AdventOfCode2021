@@ -10,6 +10,7 @@ fun main() {
     println("day4_2  : ${Day4().bingoLosing(readLines("day4.txt"))}")
     println("day5    : ${Day5().overlappingPoints(readLines("day5.txt"))}")
     println("day5_2  : ${Day5().overlappingPointsWithDiagonal(readLines("day5.txt"))}")
+    println("day6    : ${Day6().day6(readLines("day6.txt"))}")
 
 }
 
