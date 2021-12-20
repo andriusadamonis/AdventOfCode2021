@@ -1,21 +1,22 @@
 class Day6 {
 
-    fun day6(text: List<String>): Int {
+    fun day6(text: List<String>, numberOfDays: Int): Int {
 
         val fishes = text.get(0).split(',').map { it.toInt() }
-        return nextDays(fishes, 80).count()
+        return countDays(fishes, numberOfDays)
 
     }
 
-    fun nextDays(fishes: List<Int>, numberOfDays: Int): List<Int> {
+    fun countDays(fishes: Iterable<Int>, numberOfDays: Int): Int {
+
         var list = fishes
         for (d in (1..numberOfDays)) {
             list = nextDay(list)
         }
-        return list
+        return list.count()
     }
 
-    fun nextDay(fishes: List<Int>): List<Int> {
+    fun nextDay(fishes: Iterable<Int>): Iterable<Int> {
         val list = mutableListOf<Int>()
         val new = mutableListOf<Int>()
         fishes.forEach {

@@ -32,11 +32,11 @@ internal class Day6Test {
     fun testOneDay(inputStr: String, expectedStr: String) {
 
         val input = inputStr.split(',').map { it.toInt() }
-        val expected = expectedStr.split(',').map { it.toInt() }
+        val expected = expectedStr.split(',').map { it.toInt() }.count()
 
-        val actual = Day6().nextDay(input)
+        val actual = Day6().countDays(input, 1)
 
-        assertIterableEquals(expected, actual)
+        assertEquals(expected, actual)
 
     }
 
